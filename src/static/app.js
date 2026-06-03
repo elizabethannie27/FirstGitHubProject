@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const activitiesList = document.getElementById("activities-list");
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
+  const signupButton = signupForm.querySelector("button[type='submit']");
   const messageDiv = document.getElementById("message");
 
   // Function to fetch activities from API
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    signupButton.disabled = true;
 
     const email = document.getElementById("email").value;
     const activity = document.getElementById("activity").value;
@@ -78,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
       console.error("Error signing up:", error);
+    } finally {
+      signupButton.disabled = false;
     }
   });
 
